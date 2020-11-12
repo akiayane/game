@@ -70,12 +70,33 @@ func (w *worldmap) checkdoors(){
 					fmt.Scan(&dir)
 					if dir == "exit"{
 						clear()
-						w.moveDown()
-						break
+						if w.casSlice[i].locY - w.casSlice[i].doorsY == 1{
+							w.moveUp()
+							break
+						}else{
+							w.moveDown()
+							break
+						}
+
 					}
 				}
 			}else{
-
+				clear()
+				for{
+					fmt.Print("This is you castle. Type exit to leave! ")
+					var dir string
+					fmt.Scan(&dir)
+					if dir == "exit"{
+						clear()
+						if w.casSlice[i].locY - w.casSlice[i].doorsY == 1{
+							w.moveUp()
+							break
+						}else{
+							w.moveDown()
+							break
+						}
+					}
+				}
 			}
 
 		}
