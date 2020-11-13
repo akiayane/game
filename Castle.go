@@ -1,14 +1,14 @@
 package main
 
-type Castle struct {
+type Castle struct{
 	name string
 	level int
 	currentGold int
 	income int
 	friendly bool
+	group group
 }
 
-var counter int32
 
 func (c *Castle) upgrade() {
 	c.level++
@@ -16,6 +16,10 @@ func (c *Castle) upgrade() {
 }
 func (c *Castle) setFriendly(){
 	c.friendly = true
+}
+
+func (c *Castle) setGroup(){
+	
 }
 
 func newCastle(name string) *Castle {
