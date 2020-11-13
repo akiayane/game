@@ -6,20 +6,20 @@ type Castle struct{
 	currentGold int
 	income int
 	friendly bool
-	group group
+	group *group
 }
-
 
 func (c *Castle) upgrade() {
 	c.level++
 	c.income = c.income + 100
 }
+
 func (c *Castle) setFriendly(){
 	c.friendly = true
 }
 
-func (c *Castle) setGroup(){
-	
+func (c *Castle) setGroup(group *group){
+	c.group = group
 }
 
 func newCastle(name string) *Castle {

@@ -27,7 +27,6 @@ type CastleIcon struct{
 	icon string
 
 	castle *Castle
-
 }
 
 func newCastleIcon(castle Castle, upwards bool, x int, y int) *CastleIcon{
@@ -66,6 +65,7 @@ func (w *worldmap) checkdoors(){
 					x := strconv.Itoa(w.casSlice[i].doorsX)
 					y := strconv.Itoa(w.casSlice[i].doorsY)
 					fmt.Printf("Battle starts on %s, %s", x, y )
+					w.HeroIcon.group.BattleStart(w.casSlice[i].castle.group)
 					var dir string
 					fmt.Scan(&dir)
 					if dir == "exit"{
@@ -109,17 +109,7 @@ func newWorldmap() *worldmap{
 	Group := NewGroup(Alibek)
 	Hero := HeroIcon{1,1,1,1, "@", Alibek.Speed, Alibek.Speed+1,Group}
 
-	castleone := newCastle("Stratholm")
-	castleone.setFriendly()
-	castleOneIcon := newCastleIcon(*castleone, true, 10, 10)
-
-	castletwo := newCastle("Stromgard")
-	castleTwoIcon := newCastleIcon(*castletwo, false, 7, 2)
-
-	var casSlice []CastleIcon
-	casSlice = append(casSlice, *castleOneIcon)
-	casSlice = append(casSlice, *castleTwoIcon)
-	return &worldmap{140, 35, myMap,  Hero, " ", casSlice, 0,0}
+	return &worldmap{140, 35, myMap,  Hero, " ", initialize(), 0,0}
 }
 
 func (w *worldmap) updStats(){
@@ -141,6 +131,7 @@ func (w *worldmap) nextday(){
 	if w.days%7==0{
 		w.weeks++
 	}
+
 }
 
 
