@@ -13,9 +13,9 @@ type character struct {
 	Defence int
 	CritChance int
 	Speed   int
-	Enemy bool
+	Enemy   bool
 	Level   int
-	Status bool
+	Status  bool
 }
 
 type Character interface {
@@ -122,7 +122,7 @@ fmt.Println("Name - ",m.Name)
 fmt.Println("Hp - ",m.Hp)
 fmt.Println("Damage - ",m.Damage)
 fmt.Println("Defence - ",m.Defence)
-	fmt.Println("Crit Chance - ",m.CritChance)
+fmt.Println("Crit Chance - ",m.CritChance)
 fmt.Println("Speed - ",m.Speed)
 }
 

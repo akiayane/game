@@ -58,7 +58,28 @@ func (w *worldmap) checkdoors(){
 	fmt.Print("checking...")
 	for i := 0; i<len(w.casSlice); i++{
 		if w.myMap[w.casSlice[i].doorsX][w.casSlice[i].doorsY] == w.HeroIcon.icon{
-			if !w.casSlice[i].castle.friendly{
+			clear()
+			for{
+				x := strconv.Itoa(w.casSlice[i].doorsX)
+				y := strconv.Itoa(w.casSlice[i].doorsY)
+				fmt.Printf("Current position: %s, %s", x, y )
+				w.HeroIcon.group.enterCastle(w.casSlice[i].castle)
+				var dir string
+				fmt.Scan(&dir)
+				if dir == "exit"{
+					clear()
+					if w.casSlice[i].locY - w.casSlice[i].doorsY == 1{
+						w.moveUp()
+						break
+					}else{
+						w.moveDown()
+						break
+					}
+
+				}
+			}
+
+			/*if !w.casSlice[i].castle.friendly{
 				clear()
 
 				for{
@@ -99,7 +120,7 @@ func (w *worldmap) checkdoors(){
 				}
 			}
 
-		}
+		*/}
 	}
 }
 

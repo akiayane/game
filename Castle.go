@@ -32,4 +32,7 @@ func newCastle(name string) *Castle {
 	}
 	return Castle
 }
+func (c *Castle) accept(v visitor, group *group) {
+	v.visitCastle(c, group)
+}
 

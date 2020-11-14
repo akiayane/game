@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 type group struct{
 	cells []*character
@@ -58,4 +61,66 @@ func(g *group) readGroup() {
 		}
 	}
 	fmt.Println()
+}
+
+func(g *group) enterCastle(c *Castle) {
+	if c.friendly {
+		fmt.Print(" Friendly Castle")
+		visitForTrade := &visitForTrade{}
+		c.accept(visitForTrade, g)
+	} else {
+		fmt.Println(" Enemy Castle")
+		visitForFight := &visitForFight{}
+		c.accept(visitForFight, g)
+	}
+}
+
+func(g1 *group) BattleStart(g2 *group) bool {
+	fmt.Println("BATTLE STARTS!")
+	b:=newBattle()
+	n:=g1.Count()+g2.Count()
+	fmt.Println(n," total number of participants from both sides")
+	//var tmp,indox int
+	var fighters []*character
+	for h:=0; h<g1.Count(); h++{
+		fighters=append(fighters,g1.cells[h])
+	}
+	for h:=0; h<g2.Count(); h++{
+		fighters=append(fighters,g2.cells[h])
+		fighters[h].Enemy=true
+	}
+	var sorted []*character
+	sorted=fighters
+	sort.SliceStable(sorted, func(i,j int) bool {
+		return sorted[i].Speed > sorted[j].Speed
+	})
+	end:=false
+	for end!=true{
+		fmt.Println("ROUND ",b.round)
+		for g:=0; g<len(sorted); g++{
+			if end==true {break} else {
+				for u:=g; u<len(sorted); u++{
+					if g1.IsDead()==true {
+						fmt.Println("You lose")
+						return false
+					} else if g2.IsDead()==true {
+						fmt.Println("You win")
+						return true
+					} else {
+						if sorted[g].Status!=false {
+							if sorted[g]==fighters[u]{
+								if fighters[u].Enemy==true {
+									fighters[u].Attack(g2)
+								} else {
+									fighters[u].Attack(g1)
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		b.nextRound()
+	}
+	return false
 }
