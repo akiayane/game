@@ -117,6 +117,15 @@ func (m *character) calcCrit() bool {
 	return false
 }
 
+func (m *character) levelUp() {
+	m.Level++
+	m.Hp+=10
+	m.Damage+=2
+	m.Defence+=2
+	m.Speed+=1
+	fmt.Println("Level Up !")
+}
+
 func (m *character)  getStats(){
 fmt.Println("Name - ",m.Name)
 fmt.Println("Hp - ",m.Hp)
