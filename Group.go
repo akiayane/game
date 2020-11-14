@@ -65,6 +65,13 @@ func(g *group) readGroup() {
 	fmt.Println()
 }
 
+func(g *group) levelUpGroup() {
+	for _, char := range g.cells {
+		char.levelUp()
+	}
+	g.lvl++
+}
+
 func(g *group) enterCastle(c *Castle) {
 	if c.friendly {
 		fmt.Print(" Friendly Castle")

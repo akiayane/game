@@ -64,6 +64,7 @@ func (w *worldmap) checkdoors(){
 				x := strconv.Itoa(w.casSlice[i].doorsX)
 				y := strconv.Itoa(w.casSlice[i].doorsY)
 				fmt.Printf("Current position: %s, %s", x, y )
+				//w.HeroIcon.group.cells[0].gold = w.HeroIcon.gold
 				w.HeroIcon.group.enterCastle(w.casSlice[i].castle)
 				var dir string
 				fmt.Scan(&dir)

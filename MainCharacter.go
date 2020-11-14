@@ -6,6 +6,7 @@ type MainCharacter struct {
 	character
 	Level int
 	Location int
+	gold int
 }
 
 func (m *MainCharacter) levelUp() {
