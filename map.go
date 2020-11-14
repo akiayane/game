@@ -145,6 +145,8 @@ func (w *worldmap) nextday(){
 	for i:=0; i<len(w.casSlice); i++{
 		if w.casSlice[i].castle.friendly{
 			dailyGold =+ w.casSlice[i].castle.income
+		}else{
+			w.casSlice[i].castle.currentGold = w.casSlice[i].castle.currentGold + w.casSlice[i].castle.income
 		}
 	}
 	w.HeroIcon.gold = w.HeroIcon.gold + dailyGold
