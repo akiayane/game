@@ -27,7 +27,7 @@ func newCastle(name string) *Castle {
 		name: name,
 		level: 1,
 		currentGold: 100,
-		income: 150,
+		income: 50,
 		friendly: false,
 	}
 	return Castle

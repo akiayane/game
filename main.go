@@ -5,9 +5,9 @@ import "fmt"
 func main() {
 	clear()
 	myMap := newWorldmap()
-	myMap.fillMap()
 	myMap.cage()
 	for{
+		fmt.Println("Use w,s,a,d to move. Type exit to leave!")
 		myMap.checkdoors()
 		var dir string
 		fmt.Scan(&dir)
