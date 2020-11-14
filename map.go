@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"strconv"
 	"fmt"
 	"os"
@@ -33,7 +34,7 @@ type CastleIcon struct{
 func newCastleIcon(castle Castle, upwards bool, x int, y int) *CastleIcon{
 	var icon string
 	if castle.friendly{
-		icon = "П"
+		icon = "H"
 	}else{
 		icon = "X"
 	}
@@ -56,7 +57,6 @@ type worldmap struct {
 }
 
 func (w *worldmap) checkdoors(){
-	fmt.Print("checking...")
 	for i := 0; i<len(w.casSlice); i++{
 		if w.myMap[w.casSlice[i].doorsX][w.casSlice[i].doorsY] == w.HeroIcon.icon{
 			if !w.casSlice[i].castle.friendly{
@@ -106,6 +106,13 @@ func (w *worldmap) checkdoors(){
 
 func newWorldmap() *worldmap{
 	var myMap = [140][35]string{}
+	mapp := readLines("txt.txt")
+	for i:=0; i<35; i++{
+		for j:= 0; j<140; j++{
+
+			myMap[j][i] = string(mapp[i][j])
+		}
+	}
 	Alibek:= newMainCharacter("Alibek")
 	Group := NewGroup(Alibek)
 	Hero := HeroIcon{1,1,1,1, "@", Alibek.Speed, Alibek.Speed+1,Group, 100}
@@ -251,6 +258,18 @@ func clear(){
 	cmd.Stdout = os.Stdout
 	cmd.Run()
 }
+
+func readLines(path string) ([]string) {
+	file, _ := os.Open(path)
+	defer file.Close()
+	var lines []string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	return lines
+}
+
 
 
 
