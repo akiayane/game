@@ -5,11 +5,13 @@ import "fmt"
 type group struct{
 	cells []*character
 	counter int
+	lvl int
 }
 
 func  NewGroup(m *character) *group {
 	Group:=&group{cells: []*character{m}}
 	Group.counter=1
+	Group.lvl = 1
 	return Group
 }
 
@@ -58,4 +60,8 @@ func(g *group) readGroup() {
 		}
 	}
 	fmt.Println()
+}
+
+func (g * group) groupLvlup(){
+
 }

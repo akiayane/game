@@ -17,6 +17,7 @@ type HeroIcon struct {
 	movesleft int
 
 	group *group
+	gold int
 }
 
 type CastleIcon struct{
@@ -83,7 +84,7 @@ func (w *worldmap) checkdoors(){
 			}else{
 				clear()
 				for{
-					fmt.Print("This is you castle. Type exit to leave! ")
+					fmt.Print("This is your castle. Type exit to leave! ")
 					var dir string
 					fmt.Scan(&dir)
 					if dir == "exit"{
@@ -107,9 +108,9 @@ func newWorldmap() *worldmap{
 	var myMap = [140][35]string{}
 	Alibek:= newMainCharacter("Alibek")
 	Group := NewGroup(Alibek)
-	Hero := HeroIcon{1,1,1,1, "@", Alibek.Speed, Alibek.Speed+1,Group}
+	Hero := HeroIcon{1,1,1,1, "@", Alibek.Speed, Alibek.Speed+1,Group, 100}
 
-	return &worldmap{140, 35, myMap,  Hero, " ", initialize(), 0,0}
+	return &worldmap{140, 35, myMap,  Hero, ".", initialize(), 0,0}
 }
 
 func (w *worldmap) updStats(){
@@ -122,7 +123,9 @@ func (w *worldmap) updStats(){
 	speed:= strconv.Itoa(w.HeroIcon.speed)
 	day := strconv.Itoa(w.days)
 	weeks := strconv.Itoa(w.weeks)
-	fmt.Printf("Moves left: %s | Your speed: %s | Day: %s | Weeks : %s", movesLeft,speed,day,weeks )
+	gold := strconv.Itoa(w.HeroIcon.gold)
+	lvl := strconv.Itoa(w.HeroIcon.group.lvl)
+	fmt.Printf("Moves left: %s | Your speed: %s | Days: %s | Weeks : %s | Your Gold : %s | Your level : %s", movesLeft,speed,day,weeks,gold,lvl)
 	fmt.Print("\n")
 }
 
@@ -131,7 +134,13 @@ func (w *worldmap) nextday(){
 	if w.days%7==0{
 		w.weeks++
 	}
-
+	dailyGold := 0
+	for i:=0; i<len(w.casSlice); i++{
+		if w.casSlice[i].castle.friendly{
+			dailyGold =+ w.casSlice[i].castle.income
+		}
+	}
+	w.HeroIcon.gold = w.HeroIcon.gold + dailyGold
 }
 
 
@@ -182,7 +191,7 @@ func (w *worldmap) cage(){
 }
 
 func (w *worldmap) moveRight(){
-	if w.myMap[w.HeroIcon.currentX+1][w.HeroIcon.currentY] != " "{
+	if w.myMap[w.HeroIcon.currentX+1][w.HeroIcon.currentY] != w.empty{
 		w.printMap()
 	}else if w.HeroIcon.currentX + 1 == w.x-1 {
 		w.printMap()
@@ -196,7 +205,7 @@ func (w *worldmap) moveRight(){
 }
 
 func (w *worldmap) moveLeft(){
-	if w.myMap[w.HeroIcon.currentX-1][w.HeroIcon.currentY] != " "{
+	if w.myMap[w.HeroIcon.currentX-1][w.HeroIcon.currentY] != w.empty{
 		w.printMap()
 	}else if w.HeroIcon.currentX - 1 == 0 {
 		w.printMap()
@@ -210,7 +219,7 @@ func (w *worldmap) moveLeft(){
 }
 
 func (w *worldmap) moveUp(){
-	if w.myMap[w.HeroIcon.currentX][w.HeroIcon.currentY-1] != " "{
+	if w.myMap[w.HeroIcon.currentX][w.HeroIcon.currentY-1] != w.empty{
 		w.printMap()
 	}else if w.HeroIcon.currentY - 1 == 0 {
 		w.printMap()
@@ -224,7 +233,7 @@ func (w *worldmap) moveUp(){
 }
 
 func (w *worldmap) moveDown(){
-	if w.myMap[w.HeroIcon.currentX][w.HeroIcon.currentY+1] != " "{
+	if w.myMap[w.HeroIcon.currentX][w.HeroIcon.currentY+1] != w.empty{
 		w.printMap()
 	}else if w.HeroIcon.currentY + 1 == w.y-1 {
 		w.printMap()
