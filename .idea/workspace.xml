@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="459afb39-b47e-45b0-95e7-b050f0370c44" name="Default Changelist" comment="">
-<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/visitor.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Castle.go" beforeDir="false" afterPath="$PROJECT_DIR$/Castle.go" afterDir="false" />
@@ -28,10 +27,12 @@
       <change beforePath="$PROJECT_DIR$/Group.go" beforeDir="false" afterPath="$PROJECT_DIR$/Group.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/battle.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/initialize.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize.go" afterDir="false" />
-=======
+      =======
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
->>>>>>> 9bfc7f36bba7bc13023f3cf76fcb8ab62929a70d
+      &gt;&gt;&gt;&gt;&gt;&gt;&gt; 9bfc7f36bba7bc13023f3cf76fcb8ab62929a70d
       <change beforePath="$PROJECT_DIR$/map.go" beforeDir="false" afterPath="$PROJECT_DIR$/map.go" afterDir="false" />
+      =======
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; cd578e44d8a2f358994a61ac84f7c265e65aed34
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +142,6 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605120945716" />
-<<<<<<< HEAD
     <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1605363191465">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -162,8 +162,7 @@
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605363191465" />
     <state width="1877" height="775" key="GridCell.Tab.0.right/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605125604715" />
-    <state width="1877" height="216" key="GridCell.Tab.1.bottom" timestamp="1604432787155">
-=======
+    <state width="1877" height="216" key="GridCell.Tab.1.bottom" timestamp="1604432787155" />
     <state width="1877" height="234" key="GridCell.Tab.0.bottom" timestamp="1605380606782">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -181,7 +180,6 @@
     </state>
     <state width="1877" height="234" key="GridCell.Tab.0.right/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605380606782" />
     <state width="1877" height="216" key="GridCell.Tab.1.bottom" timestamp="1605320271633">
->>>>>>> 9bfc7f36bba7bc13023f3cf76fcb8ab62929a70d
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="216" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605320271633" />
@@ -201,6 +199,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605215538548" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1605381857300">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605381857300" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605374130748">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
