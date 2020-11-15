@@ -82,7 +82,7 @@ func (w *worldmap) checkdoors(){
 	}
 }
 
-func newWorldmap() *worldmap{
+func newWorldmap(Alibek Character, Group *group) *worldmap{
 	var myMap = [140][35]string{}
 	mapp := readLines("txt.txt")
 	for i:=0; i<35; i++{
@@ -91,10 +91,6 @@ func newWorldmap() *worldmap{
 			myMap[j][i] = string(mapp[i][j])
 		}
 	}
-	Alibek:= newMainCharacter("Alibek")
-	Alibek.setGold(200)
-	mainName = Alibek.getName()
-	Group := NewGroup(Alibek)
 	Hero := &HeroIcon{10,4,10,4, "@", Alibek.getSpeed()+3, Alibek.getSpeed()+4, 0, Group}
 
 	concreteWeather.register(Hero)
@@ -158,6 +154,18 @@ func (w *worldmap) fillMap(){
 }
 
 func (w *worldmap) printMap(){
+
+	enemy := false
+	for _,s := range w.casSlice {
+		if !s.castle.friendly {
+			enemy = true
+		}
+	}
+	if !enemy {
+		fmt.Println("Victory")
+		os.Exit(0)
+	}
+
 	w.updStats()
 	var i,j int
 	w.myMap[w.HeroIcon.currentX][w.HeroIcon.currentY] = w.HeroIcon.icon
