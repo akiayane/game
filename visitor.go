@@ -60,9 +60,9 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 
 	for {
 		fmt.Println()
-		fmt.Println("1. Manage Group" +
-			" 2. Buy Items" +
-			" 3. Level Up Group" +
+		fmt.Println("1.Manage Group" +
+			" 2.Buy Items" +
+			" 3.Level Up Group" +
 			". Type exit to leave from castle")
 
 		var input string
@@ -74,8 +74,8 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 		case "1":
 			for {
 				vft.myGroup.readGroup()
-				fmt.Println("1. Remove from group" +
-					" 2. Add to group" +
+				fmt.Println("1.Remove from group" +
+					" 2.Add to group" +
 					". Type back to return to previous menu")
 
 				var input string
@@ -122,22 +122,69 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 				case "2":
 					for {
 						fmt.Println("Whom you are going to add? Type back to return to previous menu")
-						fmt.Println("1. Peasant 2. Ork 3. Goblin 4. Pikeman")
+
+						tmpPeasant := newPeasant()
+						tmpOrk := newOrk()
+						tmpGoblin := newGoblin()
+						tmpPikeman := newPikeman()
+
+						fmt.Println()
+
+						tmpPeasant.getStats()
+						tmpOrk.getStats()
+						tmpGoblin.getStats()
+						tmpPikeman.getStats()
+						fmt.Println("1.Peasant 2.Ork 3.Goblin 4.Pikeman")
+						fmt.Println("Gold:", vft.mainChar.getGold())
+						fmt.Print("Current group: ")
+						vft.myGroup.readGroup()
+
 
 						var input string
 						fmt.Scan(&input)
 
-						if input == "back" {break}
+						if input == "back" {
+							clear()
+							break
+						}
 
 						switch input {
 						case "1":
-							vft.myGroup.AddToGroup(newPeasant())
+							if vft.mainChar.getGold() >= tmpPeasant.getGold() {
+								if group.counter < 4 {
+									vft.mainChar.setGold(vft.mainChar.getGold() - tmpPeasant.getGold())
+								}
+								vft.myGroup.AddToGroup(newPeasant())
+							} else {
+								fmt.Println("Not Enough Gold")
+							}
 						case "2":
-							vft.myGroup.AddToGroup(newOrk())
+							if vft.mainChar.getGold() >= tmpOrk.getGold() {
+								if group.counter < 4 {
+									vft.mainChar.setGold(vft.mainChar.getGold() - tmpOrk.getGold())
+								}
+								vft.myGroup.AddToGroup(newOrk())
+							} else {
+								fmt.Println("Not Enough Gold")
+							}
 						case "3":
-							vft.myGroup.AddToGroup(newGoblin())
+							if vft.mainChar.getGold() >= tmpGoblin.getGold() {
+								if group.counter < 4 {
+									vft.mainChar.setGold(vft.mainChar.getGold() - tmpGoblin.getGold())
+								}
+								vft.myGroup.AddToGroup(newGoblin())
+							} else {
+								fmt.Println("Not Enough Gold")
+							}
 						case "4":
-							vft.myGroup.AddToGroup(newPikeman())
+							if vft.mainChar.getGold() >= tmpPikeman.getGold() {
+								if group.counter < 4 {
+									vft.mainChar.setGold(vft.mainChar.getGold() - tmpPikeman.getGold())
+								}
+								vft.myGroup.AddToGroup(newPikeman())
+							} else {
+								fmt.Println("Not Enough Gold")
+							}
 						default:
 							fmt.Println("Incorrect input")
 						}
@@ -157,16 +204,33 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 			// bay item
 		case "3":
 			for {
-				fmt.Println("For some amount of money you can upgrade your group. " +
-					"Type back to return to previous menu")
-				fmt.Println("Gold structure should be fixed")
+				fmt.Println("For some amount of money you can upgrade your group.")
 
-				fmt.Println("Level of group:", vft.myGroup.lvl)
+				lvlUpGold := vft.myGroup.lvl*50
 
-				vft.myGroup.levelUpGroup()
+				fmt.Println("Current level of group:", vft.myGroup.lvl, "Gold:", vft.mainChar.getGold())
+				fmt.Println(lvlUpGold, "gold required for level up")
+
+				fmt.Println("Do you want upgrade your group? 1.Yes 2.No")
 
 				var input string
 				fmt.Scan(&input)
+
+				if input == "back" {break}
+
+				switch input {
+				case "1":
+					if vft.mainChar.getGold() >= lvlUpGold {
+						vft.mainChar.setGold(vft.mainChar.getGold() - lvlUpGold)
+						vft.myGroup.levelUpGroup()
+					} else {
+						fmt.Println("Not Enough Gold")
+					}
+				case "2":
+					input = "back"
+				default:
+					fmt.Println("Incorrect input")
+				}
 
 				if input == "back" {break}
 			}

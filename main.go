@@ -6,6 +6,7 @@ func main() {
 	clear()
 	myMap := newWorldmap()
 	myMap.cage()
+	//myMap.getCoor()
 	for{
 		fmt.Println("Use w,s,a,d to move. Type exit to leave!")
 		myMap.checkdoors()

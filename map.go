@@ -94,12 +94,16 @@ func newWorldmap() *worldmap{
 	Alibek.setGold(200)
 	mainName = Alibek.getName()
 	Group := NewGroup(Alibek)
-	Group.AddToGroup(newGoblin())
-	Group.AddToGroup(newOrk())
-	Group.AddToGroup(newOrk())
-	Hero := HeroIcon{1,1,1,1, "@", Alibek.getSpeed(), Alibek.getSpeed()+1,Group, 100}
+	//Group.AddToGroup(newGoblin())
+	//Group.AddToGroup(newOrk())
+	//Group.AddToGroup(newOrk())
+	Hero := HeroIcon{10,4,10,4, "@", Alibek.getSpeed()+3, Alibek.getSpeed()+4,Group, 100}
 
 	return &worldmap{140, 35, myMap,  Hero, ".", initialize(), 0,0}
+}
+
+func (hi *HeroIcon) update(state int) {
+
 }
 
 func (w *worldmap) updStats(){
@@ -163,25 +167,36 @@ func (w *worldmap) printMap(){
 }
 
 func (w *worldmap) cage(){
-	var i int
-	for i = 0; i<w.x; i++{
-		w.myMap[i][0] = "═"
+
+	for i:= 0; i<w.x; i++{
+		for j:= 0; j<w.y; j++{
+			switch w.myMap[i][j] {
+			case "Q":
+				w.myMap[i][j] = "╔"
+			case "W":
+				w.myMap[i][j] = "╗"
+			case "E":
+				w.myMap[i][j] = "╚"
+			case "R":
+				w.myMap[i][j] = "╝"
+			case "Y":
+				w.myMap[i][j] = "║"
+			case "T":
+				w.myMap[i][j] = "═"
+			}
+		}
 	}
-	for i = 0; i<w.y; i++{
-		w.myMap[0][i] = "║"
-	}
-	for i = 0; i<w.y; i++{
-		w.myMap[w.x-1][i] = "║"
-	}
-	for i = 0; i<w.x; i++{
-		w.myMap[i][w.y-1] = "═"
-	}
-	w.myMap[0][0] = "╔"
-	w.myMap[w.x-1][w.y-1] = "╝"
-	w.myMap[0][w.y-1] = "╚"
-	w.myMap[w.x-1][0] = "╗"
-	w.myMap[4][4] = "*"
 	w.printMap()
+}
+
+func (w *worldmap) getCoor(){
+	for i:= 0; i<w.x; i++{
+		for j:= 0; j<w.y; j++{
+			if w.myMap[i][j] == "H" || w.myMap[i][j] == "X"{
+				fmt.Println(i, j)
+			}
+		}
+	}
 }
 
 func (w *worldmap) moveRight(){

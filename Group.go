@@ -11,7 +11,7 @@ type group struct{
 	lvl int
 }
 
-func  NewGroup(m Character) *group {
+func NewGroup(m Character) *group {
 	Group:=&group{cells: []Character{m}}
 	Group.counter=1
 	Group.lvl = 1
@@ -33,6 +33,9 @@ func (g *group) AddToGroup(c Character) {
 			c.setFriend(true)
 		}
 		g.counter++
+		for i := 1; i<=g.lvl; i++ {
+			c.levelUp()
+		}
 		g.cells=append(g.cells,c)
 	} else {
 		fmt.Println("Group already full!")

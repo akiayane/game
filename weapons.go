@@ -2,15 +2,16 @@ package main
 
 import "fmt"
 
+type weapon interface {
+	GetDamage() int
+	getInfo()
+}
+
 type Weapon struct {
 	damage int
 	name string
 }
 
-type weapon interface {
-	GetDamage() int
-	getInfo()
-}
 
 func (cb *builder) setDamage(d int) WeaponBuilder {
 	cb.damage = d

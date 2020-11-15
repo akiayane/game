@@ -22,8 +22,10 @@ type Character interface {
 	setEnemy(bool)
 	getGold() int
 	setGold(int)
+	getWeapon() weapon
 	equipWeapon(w weapon)
 	CalcDefence() float32
+	CalcDamage() float32
 	calcCrit() bool
 	levelUp()
 }
@@ -40,6 +42,8 @@ type character struct {
 	Status  bool
 	Friend  bool
 	Gold    int
+
+	Weapon weapon
 }
 
 func (m *character) getHp() int{
@@ -95,8 +99,12 @@ func (m *character) setGold (gold int) {
 	m.Gold = gold
 }
 
-func (m *character)  equipWeapon(w weapon) {
-	m.Damage=m.Damage + w.GetDamage()
+func (m *character) getWeapon() weapon {
+	return m.Weapon
+}
+
+func (m *character) equipWeapon(w weapon) {
+	m.Weapon = w
 }
 
 func (m *character) CalcDefence() float32 {
@@ -113,6 +121,13 @@ func (m *character) CalcDefence() float32 {
 	return defensePercent
 }
 
+func (m *character) CalcDamage() float32 {
+	if m.Weapon == nil {
+		return float32(m.Damage)
+	}
+	return float32(m.Damage + m.Weapon.GetDamage())
+}
+
 func (m *character) calcCrit() bool {
 	rand.Seed(time.Now().UTC().UnixNano())
 	var r = rand.Intn(100)
@@ -124,10 +139,10 @@ func (m *character) calcCrit() bool {
 
 func (m *character) levelUp() {
 	m.Level++
-	m.Hp+=10
+	m.Hp+=5
 	m.Damage+=2
 	m.Defence+=2
-	m.Speed+=1
+	m.Speed+=2
 	fmt.Println("Level Up !")
 }
 
@@ -138,6 +153,8 @@ func (m *character)  getStats(){
 	fmt.Println("Defence - ",m.Defence)
 	fmt.Println("Crit Chance - ",m.CritChance)
 	fmt.Println("Speed - ",m.Speed)
+	fmt.Println("Price:", m.Gold)
+	fmt.Println()
 }
 
 
@@ -168,7 +185,7 @@ var crit = 1
 				fmt.Println("CRITICAL HIT!")
 				crit=2
 			}
-			dd:= int(float32(m.Damage)*((100-g.cells[0].CalcDefence())/100)*float32(crit))
+			dd:= int(m.CalcDamage()*((100-g.cells[0].CalcDefence())/100)*float32(crit))
 			//fmt.Println(dd) // damage done
 			g.cells[0].setHp(g.cells[0].getHp()-dd)
 			fmt.Println(m.getName()," hits ",g.cells[0].getName()," for ",dd)
@@ -183,7 +200,7 @@ var crit = 1
 				fmt.Println("CRITICAL HIT!")
 				crit=2
 			}
-			dd:= int(float32(m.Damage)*((100-g.cells[1].CalcDefence())/100)*float32(crit))
+			dd:= int(m.CalcDamage()*((100-g.cells[1].CalcDefence())/100)*float32(crit))
 			//fmt.Println(dd) // damage done
 			g.cells[1].setHp(g.cells[1].getHp()-dd)
 			fmt.Println(m.getName()," hits ",g.cells[1].getName()," for ",dd)
@@ -198,7 +215,7 @@ var crit = 1
 				fmt.Println("CRITICAL HIT!")
 				crit=2
 			}
-			dd:= int(float32(m.Damage)*((100-g.cells[2].CalcDefence())/100)*float32(crit))
+			dd:= int(m.CalcDamage()*((100-g.cells[2].CalcDefence())/100)*float32(crit))
 			//fmt.Println(dd) // damage done
 			g.cells[2].setHp(g.cells[2].getHp()-dd)
 			fmt.Println(m.getName()," hits ",g.cells[2].getName()," for ",dd)
@@ -213,7 +230,7 @@ var crit = 1
 				fmt.Println("CRITICAL HIT!")
 				crit=2
 			}
-			dd:= int(float32(m.Damage)*((100-g.cells[3].CalcDefence())/100)*float32(crit))
+			dd:= int(m.CalcDamage()*((100-g.cells[3].CalcDefence())/100)*float32(crit))
 			//fmt.Println(dd) // damage done
 			g.cells[3].setHp(g.cells[3].getHp()-dd)
 			fmt.Println(m.getName()," hits ",g.cells[3].getName()," for ",dd)
@@ -304,6 +321,7 @@ func (cb *Builder) Create() Character {
 		true,
 		false,
 		100,
+		nil,
 	}
 }
 /////////////////////////////////////WEAPONS////////////////////////////
