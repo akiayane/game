@@ -194,14 +194,64 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 			// manage group
 		case "2":
 			for {
-				fmt.Println("Buy Item Should Be fixed")
+				fmt.Println("Welcome to the secret shop")
+				fmt.Println("Gold:", vft.mainChar.getGold())
+				fmt.Println()
+
+				if vft.mainChar.getWeapon() != nil {
+					fmt.Println("Current weapon:")
+					vft.mainChar.getWeapon().getInfo()
+				} else {
+					fmt.Println("You do not have a weapon")
+				}
+
+				fmt.Println("You can buy: 1.Knife 2.Sword 3.Axe 4.Excalibur")
+				Knife.getInfo()
+				Sword.getInfo()
+				Axe.getInfo()
+				Excalibur.getInfo()
+
+				fmt.Println("Type back to return to previous menu")
+
 
 				var input string
 				fmt.Scan(&input)
 
 				if input == "back" {break}
+
+				switch input {
+				case "1":
+					if vft.mainChar.getGold() >= Knife.GetPrice() {
+						vft.mainChar.setGold(vft.mainChar.getGold() - Knife.GetPrice())
+						vft.mainChar.equipWeapon(Knife)
+					} else {
+						fmt.Println("Not Enough Gold")
+					}
+				case "2":
+					if vft.mainChar.getGold() >= Sword.GetPrice() {
+						vft.mainChar.setGold(vft.mainChar.getGold() - Sword.GetPrice())
+						vft.mainChar.equipWeapon(Sword)
+					} else {
+						fmt.Println("Not Enough Gold")
+					}
+				case "3":
+					if vft.mainChar.getGold() >= Axe.GetPrice() {
+						vft.mainChar.setGold(vft.mainChar.getGold() - Axe.GetPrice())
+						vft.mainChar.equipWeapon(Axe)
+					} else {
+						fmt.Println("Not Enough Gold")
+					}
+				case "4":
+					if vft.mainChar.getGold() >= Excalibur.GetPrice() {
+						vft.mainChar.setGold(vft.mainChar.getGold() - Excalibur.GetPrice())
+						vft.mainChar.equipWeapon(Excalibur)
+					} else {
+						fmt.Println("Not Enough Gold")
+					}
+				default:
+					fmt.Println("Incorrect input")
+				}
 			}
-			// bay item
 		case "3":
 			for {
 				fmt.Println("For some amount of money you can upgrade your group.")
@@ -223,6 +273,7 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 					if vft.mainChar.getGold() >= lvlUpGold {
 						vft.mainChar.setGold(vft.mainChar.getGold() - lvlUpGold)
 						vft.myGroup.levelUpGroup()
+						fmt.Println("Level Up!")
 					} else {
 						fmt.Println("Not Enough Gold")
 					}

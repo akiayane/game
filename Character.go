@@ -10,6 +10,7 @@ type Character interface {
 	Attack(g *group)
 	getStats()
 	getName() string
+	setName(name string)
 	getHp() int
 	setHp(int)
 	getSpeed() int
@@ -65,6 +66,10 @@ func (m *character) setSpeed (speed int) {
 
 func (m *character) getName() string{
 	return m.Name
+}
+
+func (m *character) setName(name string) {
+	m.Name = name
 }
 
 func (m *character) isStatus() bool {
@@ -143,7 +148,6 @@ func (m *character) levelUp() {
 	m.Damage+=2
 	m.Defence+=2
 	m.Speed+=2
-	fmt.Println("Level Up !")
 }
 
 func (m *character)  getStats(){
@@ -244,84 +248,3 @@ var crit = 1
 		m.Attack(g)
 	}
 }
-
-
-
-/////////////////////////////////////BUILDER////////////////////////////
-func (cb *Builder) setName(name string) CharBuilder {
-	cb.name = name
-	return cb
-}
-
-func (cb *Builder) setHp(num int) CharBuilder {
-	cb.hp=num
-	return cb
-}
-
-func (cb *Builder) setDamage(num int) CharBuilder {
-	cb.damage=num
-	return cb
-}
-
-func (cb *Builder) setDefence(num int) CharBuilder {
-	cb.defence=num
-	return cb
-}
-
-func (cb *Builder) setCritChance(num int) CharBuilder {
-	cb.critchance=num
-	return cb
-}
-
-func (cb *Builder) setSpeed(num int) CharBuilder {
-	cb.speed=num
-	return cb
-}
-
-func (cb *Builder) setStatus(num bool) CharBuilder {
-	cb.status=num
-	return cb
-}
-
-type CharBuilder interface {
-	setName(name string) CharBuilder
-	setHp(num int) CharBuilder
-	setDamage(num int) CharBuilder
-	setDefence(num int) CharBuilder
-	setSpeed(num int) CharBuilder
-	setStatus(num bool) CharBuilder
-	Create() Character
-}
-
-type Builder struct {
-	name string
-	level int
-	hp int
-	damage int
-	defence int
-	critchance int
-	speed int
-	status bool
-}
-
-func NewCharBuilder() *Builder {
-	return &Builder{}
-}
-
-func (cb *Builder) Create() Character {
-	return &character{
-		cb.name,
-		cb.hp,
-		cb.damage,
-		cb.defence,
-		cb.critchance,
-		cb.speed,
-		false,
-		1,
-		true,
-		false,
-		100,
-		nil,
-	}
-}
-/////////////////////////////////////WEAPONS////////////////////////////

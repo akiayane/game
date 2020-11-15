@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type MainCharacter struct {
 	character
 	Level int
@@ -15,7 +13,6 @@ func (m *MainCharacter) levelUp() {
 	m.Damage+=2
 	m.Defence+=2
 	m.Speed+=1
-	fmt.Println("Level Up !")
 }
 
 func newMainCharacter(name string) Character {

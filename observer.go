@@ -1,22 +1,27 @@
 package main
 
-import "math/rand"
+import (
+	"fmt"
+	"math/rand"
+)
 
 type subject interface {
-	register(Observer HeroIcon)
-	deregister(Observer HeroIcon)
+	register(Observer *HeroIcon)
+	deregister(Observer *HeroIcon)
 	notifyAll()
 }
 
 type weatherCondition struct {
-	observerList []HeroIcon
+	observerList []*HeroIcon
 	state int
 }
 
-func (w *weatherCondition) getState() {
+func (w *weatherCondition) updateState() {
 	r := rand.Intn(4)
 	
 	condition := weather[r]
+
+	fmt.Println("Weather today:", condition)
 
 	switch condition {
 	case "sun":
@@ -38,15 +43,15 @@ func (w *weatherCondition) notifyAll() {
 	}
 }
 
-func (w *weatherCondition) register(o HeroIcon) {
+func (w *weatherCondition) register(o *HeroIcon) {
 	w.observerList = append(w.observerList, o)
 }
 
-func (w *weatherCondition) deregister(o HeroIcon) {
+func (w *weatherCondition) deregister(o *HeroIcon) {
 	w.observerList = removeFromslice(w.observerList, o)
 }
 
-func removeFromslice(observerList []HeroIcon, observerToRemove HeroIcon) []HeroIcon {
+func removeFromslice(observerList []*HeroIcon, observerToRemove *HeroIcon) []*HeroIcon {
 	observerListLength := len(observerList)
 	for i, observer := range observerList {
 		if observerToRemove.group.cells[0].getName() == observer.group.cells[0].getName() {

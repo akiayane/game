@@ -1,45 +1,63 @@
 package main
 
-func initialize() []CastleIcon{
+func initialize() []*CastleIcon{
 
-	myCastle := newCastle("Stratholm")
+	myCastle := newCastle("Homeland")
 	myCastle.setFriendly()
 	myCastleIcon := newCastleIcon(*myCastle, true, 13, 6)
 
-	groupSample := NewGroup(newOrk())
-	groupSample.AddToGroup(newPikeman())
-	groupSample.AddToGroup(newPeasant())
-	groupSample.AddToGroup(newGoblin())
+	firstEnemyCastleGroup := NewGroup(newGoblin())
+	firstEnemyCastleGroup.AddToGroup(newGoblin())
+	firstEnemyCastleGroup.AddToGroup(newPeasant())
+	firstEnemyCastleGroup.AddToGroup(newPeasant())
 
-
-
-	firstEnemyCastle := newCastle("Stromgard")
-	firstEnemyCastle.setGroup(groupSample)
+	firstEnemyCastle := newCastle("Dark Dungeons")
+	firstEnemyCastle.setGroup(firstEnemyCastleGroup)
 	firstEnemyCastleIcon := newCastleIcon(*firstEnemyCastle, false, 64, 9)
 
-	waterCastle := newCastle("Stromgard")
-	//castletree.setGroup(groupSample)
+	waterCastleGroup := NewGroup(newPikeman())
+	waterCastleGroup.AddToGroup(newPikeman())
+	waterCastleGroup.AddToGroup(newPeasant())
+	waterCastleGroup.AddToGroup(newPeasant())
+
+	waterCastle := newCastle("Aqua Heaven")
+	waterCastle.setGroup(waterCastleGroup)
 	waterCastleIcon := newCastleIcon(*waterCastle, false, 121, 4)
 
-	hillCastle := newCastle("Stromgard")
-	//castlefour.setGroup(groupSample)
+	hillCastleGroup := NewGroup(newOrk())
+	hillCastleGroup.AddToGroup(newGoblin())
+	hillCastleGroup.AddToGroup(newGoblin())
+	hillCastleGroup.AddToGroup(newGoblin())
+
+	hillCastle := newCastle("Pit of Death")
+	hillCastle.setGroup(hillCastleGroup)
 	hillCastleIcon := newCastleIcon(*hillCastle, true, 102, 17)
 
-	mountainCastle := newCastle("Stromgard")
-	//castlefour.setGroup(groupSample)
+	mountainCastleGroup := NewGroup(newOrk())
+	mountainCastleGroup.AddToGroup(newPikeman())
+	mountainCastleGroup.AddToGroup(newPeasant())
+	mountainCastleGroup.AddToGroup(newGoblin())
+
+	mountainCastle := newCastle("Windy Peaks")
+	mountainCastle.setGroup(mountainCastleGroup)
 	mountainCastleIcon := newCastleIcon(*mountainCastle, true, 41, 27)
 
-	farFarCastle := newCastle("Stromgard")
-	//castlefour.setGroup(groupSample)
+	farFarCastleGroup := NewGroup(newOrk())
+	farFarCastleGroup.AddToGroup(newOrk())
+	farFarCastleGroup.AddToGroup(newOrk())
+	farFarCastleGroup.AddToGroup(newOrk())
+
+	farFarCastle := newCastle("Gachi Club")
+	farFarCastle.setGroup(farFarCastleGroup)
 	farFarCastleIcon := newCastleIcon(*farFarCastle, false, 122, 30)
 
-	var casSlice []CastleIcon
-	casSlice = append(casSlice, *myCastleIcon)
-	casSlice = append(casSlice, *firstEnemyCastleIcon)
-	casSlice = append(casSlice, *waterCastleIcon)
-	casSlice = append(casSlice, *hillCastleIcon)
-	casSlice = append(casSlice, *mountainCastleIcon)
-	casSlice = append(casSlice, *farFarCastleIcon)
+	var casSlice []*CastleIcon
+	casSlice = append(casSlice, myCastleIcon)
+	casSlice = append(casSlice, firstEnemyCastleIcon)
+	casSlice = append(casSlice, waterCastleIcon)
+	casSlice = append(casSlice, hillCastleIcon)
+	casSlice = append(casSlice, mountainCastleIcon)
+	casSlice = append(casSlice, farFarCastleIcon)
 
 	return casSlice
 }

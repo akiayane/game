@@ -11,7 +11,10 @@ type Castle struct{
 
 func (c *Castle) upgrade() {
 	c.level++
-	c.income = c.income + 100
+	c.income = c.income + 10
+	if !c.friendly {
+		c.group.levelUpGroup()
+	}
 }
 
 func (c *Castle) setFriendly(){

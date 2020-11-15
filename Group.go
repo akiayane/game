@@ -31,9 +31,10 @@ func (g *group) AddToGroup(c Character) {
 	if g.counter<4{
 		if g.cells[0].getName()==mainName {
 			c.setFriend(true)
+			c.setName("My " + c.getName())
 		}
 		g.counter++
-		for i := 1; i<=g.lvl; i++ {
+		for i := 1; i<g.lvl; i++ {
 			c.levelUp()
 		}
 		g.cells=append(g.cells,c)

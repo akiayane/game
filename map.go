@@ -2,10 +2,10 @@ package main
 
 import (
 	"bufio"
-	"strconv"
 	"fmt"
 	"os"
 	"os/exec"
+	"strconv"
 )
 
 type HeroIcon struct {
@@ -16,9 +16,10 @@ type HeroIcon struct {
 	icon string
 	speed int
 	movesleft int
+	state int
 
 	group *group
-	gold int
+
 }
 
 type CastleIcon struct{
@@ -49,9 +50,9 @@ type worldmap struct {
 	x int
 	y int
 	myMap [140][35]string
-	HeroIcon HeroIcon
+	HeroIcon *HeroIcon
 	empty string
-	casSlice []CastleIcon
+	casSlice []*CastleIcon
 	days int
 	weeks int
 }
@@ -94,25 +95,28 @@ func newWorldmap() *worldmap{
 	Alibek.setGold(200)
 	mainName = Alibek.getName()
 	Group := NewGroup(Alibek)
-	//Group.AddToGroup(newGoblin())
-	//Group.AddToGroup(newOrk())
-	//Group.AddToGroup(newOrk())
-	Hero := HeroIcon{10,4,10,4, "@", Alibek.getSpeed()+3, Alibek.getSpeed()+4,Group, 100}
+	Hero := &HeroIcon{10,4,10,4, "@", Alibek.getSpeed()+3, Alibek.getSpeed()+4, 0, Group}
+
+	concreteWeather.register(Hero)
 
 	return &worldmap{140, 35, myMap,  Hero, ".", initialize(), 0,0}
 }
 
 func (hi *HeroIcon) update(state int) {
+	hi.state = state
+}
 
+func (hi *HeroIcon) calculateMoves() int {
+	return hi.movesleft + hi.state
 }
 
 func (w *worldmap) updStats(){
-	if w.HeroIcon.movesleft == 0{
+	if w.HeroIcon.calculateMoves() == 0{
 		w.nextday()
 		w.HeroIcon.movesleft = w.HeroIcon.speed
 	}
 	w.HeroIcon.movesleft--
-	movesLeft := strconv.Itoa(w.HeroIcon.movesleft)
+	movesLeft := strconv.Itoa(w.HeroIcon.calculateMoves())
 	speed:= strconv.Itoa(w.HeroIcon.speed)
 	day := strconv.Itoa(w.days)
 	weeks := strconv.Itoa(w.weeks)
@@ -126,6 +130,9 @@ func (w *worldmap) nextday(){
 	w.days++
 	if w.days%7==0{
 		w.weeks++
+		for _, s := range w.casSlice {
+			s.castle.upgrade()
+		}
 	}
 	dailyGold := 0
 	for i:=0; i<len(w.casSlice); i++{
@@ -136,6 +143,8 @@ func (w *worldmap) nextday(){
 		}
 	}
 	w.HeroIcon.group.cells[0].setGold(w.HeroIcon.group.cells[0].getGold() + dailyGold)
+
+	concreteWeather.updateState()
 }
 
 
