@@ -37,7 +37,6 @@ func (gf *gameFacade) getMainChar() Character {
 }
 
 func (gf *gameFacade) printMap() {
-
 	w := &worldmap{}
 	if gf.gameMap == nil {
 		w = newWorldmap(newMainCharacter("Sample"), NewGroup(newMainCharacter("Sample")))

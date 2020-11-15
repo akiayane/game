@@ -3,7 +3,6 @@ package main
 type Castle struct{
 	name string
 	level int
-	currentGold int
 	income int
 	friendly bool
 	group *group
@@ -29,7 +28,6 @@ func newCastle(name string) *Castle {
 	Castle := &Castle{
 		name: name,
 		level: 1,
-		currentGold: 100,
 		income: 50,
 		friendly: false,
 	}
