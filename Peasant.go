@@ -1,17 +1,20 @@
 package main
 
 type Peasant struct {
-	Character
+	character
 }
 
-func newPeasant() *character {
-	Char := &character{
+func newPeasant() Character {
+	Char := &Peasant{ character : character{
 		Name: "Peasant",
 		Hp: 10,
 		Damage: 4,
 		Defence: 4,
 		Speed: 5,
 		Status: true,
+		Gold: 30,
+	},
+
 	}
 	return Char
 }

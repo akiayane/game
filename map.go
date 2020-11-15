@@ -66,9 +66,7 @@ func (w *worldmap) checkdoors(){
 				fmt.Printf("Current position: %s, %s", x, y )
 				//w.HeroIcon.group.cells[0].gold = w.HeroIcon.gold
 				w.HeroIcon.group.enterCastle(w.casSlice[i].castle)
-				var dir string
-				fmt.Scan(&dir)
-				if dir == "exit"{
+
 					clear()
 					if w.casSlice[i].locY - w.casSlice[i].doorsY == 1{
 						w.moveUp()
@@ -78,51 +76,8 @@ func (w *worldmap) checkdoors(){
 						break
 					}
 
-				}
 			}
-
-			/*if !w.casSlice[i].castle.friendly{
-				clear()
-
-				for{
-					x := strconv.Itoa(w.casSlice[i].doorsX)
-					y := strconv.Itoa(w.casSlice[i].doorsY)
-					fmt.Printf("Battle starts on %s, %s", x, y )
-					w.HeroIcon.group.BattleStart(w.casSlice[i].castle.group)
-					var dir string
-					fmt.Scan(&dir)
-					if dir == "exit"{
-						clear()
-						if w.casSlice[i].locY - w.casSlice[i].doorsY == 1{
-							w.moveUp()
-							break
-						}else{
-							w.moveDown()
-							break
-						}
-
-					}
-				}
-			}else{
-				clear()
-				for{
-					fmt.Print("This is your castle. Type exit to leave! ")
-					var dir string
-					fmt.Scan(&dir)
-					if dir == "exit"{
-						clear()
-						if w.casSlice[i].locY - w.casSlice[i].doorsY == 1{
-							w.moveUp()
-							break
-						}else{
-							w.moveDown()
-							break
-						}
-					}
-				}
 			}
-
-		*/}
 	}
 }
 
@@ -136,8 +91,13 @@ func newWorldmap() *worldmap{
 		}
 	}
 	Alibek:= newMainCharacter("Alibek")
+	Alibek.setGold(200)
+	mainName = Alibek.getName()
 	Group := NewGroup(Alibek)
-	Hero := HeroIcon{1,1,1,1, "@", Alibek.Speed, Alibek.Speed+1,Group, 100}
+	Group.AddToGroup(newGoblin())
+	Group.AddToGroup(newOrk())
+	Group.AddToGroup(newOrk())
+	Hero := HeroIcon{1,1,1,1, "@", Alibek.getSpeed(), Alibek.getSpeed()+1,Group, 100}
 
 	return &worldmap{140, 35, myMap,  Hero, ".", initialize(), 0,0}
 }
@@ -152,7 +112,7 @@ func (w *worldmap) updStats(){
 	speed:= strconv.Itoa(w.HeroIcon.speed)
 	day := strconv.Itoa(w.days)
 	weeks := strconv.Itoa(w.weeks)
-	gold := strconv.Itoa(w.HeroIcon.gold)
+	gold := strconv.Itoa(w.HeroIcon.group.cells[0].getGold())
 	lvl := strconv.Itoa(w.HeroIcon.group.lvl)
 	fmt.Printf("Moves left: %s | Your speed: %s | Days: %s | Weeks : %s | Your Gold : %s | Your level : %s", movesLeft,speed,day,weeks,gold,lvl)
 	fmt.Print("\n")
@@ -166,12 +126,12 @@ func (w *worldmap) nextday(){
 	dailyGold := 0
 	for i:=0; i<len(w.casSlice); i++{
 		if w.casSlice[i].castle.friendly{
-			dailyGold =+ w.casSlice[i].castle.income
+			dailyGold += w.casSlice[i].castle.income
 		}else{
 			w.casSlice[i].castle.currentGold = w.casSlice[i].castle.currentGold + w.casSlice[i].castle.income
 		}
 	}
-	w.HeroIcon.gold = w.HeroIcon.gold + dailyGold
+	w.HeroIcon.group.cells[0].setGold(w.HeroIcon.group.cells[0].getGold() + dailyGold)
 }
 
 
@@ -189,6 +149,9 @@ func (w *worldmap) printMap(){
 	var i,j int
 	w.myMap[w.HeroIcon.currentX][w.HeroIcon.currentY] = w.HeroIcon.icon
 	for i:= 0; i< len(w.casSlice); i++{
+		if w.casSlice[i].castle.friendly {
+			w.casSlice[i].icon = "H"
+		}
 		w.myMap[w.casSlice[i].locX][w.casSlice[i].locY] = w.casSlice[i].icon
 	}
 	for j = 0; j<w.y; j++{

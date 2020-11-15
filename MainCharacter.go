@@ -18,8 +18,8 @@ func (m *MainCharacter) levelUp() {
 	fmt.Println("Level Up !")
 }
 
-func newMainCharacter(name string) *character {
-	MainCharacter := &character{
+func newMainCharacter(name string) Character {
+	MainCharacter := &MainCharacter{ character : character{
 		Name: name,
 		Level: 1,
 		Hp: 10,
@@ -28,6 +28,9 @@ func newMainCharacter(name string) *character {
 		CritChance: 10,
 		Speed: 5,
 		Status: true,
+		Friend: true,
+		Gold: 0,
+	},
 	}
 	return MainCharacter
 }

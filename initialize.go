@@ -6,19 +6,10 @@ func initialize() []CastleIcon{
 	castleone.setFriendly()
 	castleOneIcon := newCastleIcon(*castleone, true, 10, 10)
 
-	peasant := newPeasant()
-	peasant.Enemy = true
-	goblin := newGoblin()
-	goblin.Enemy = true
-	ork := newOrk()
-	ork.Enemy = true
-	pikeman := newPikeman()
-	pikeman.Enemy = true
-
-	groupSample := NewGroup(peasant)
-	groupSample.AddToGroup(goblin)
-	groupSample.AddToGroup(ork)
-	groupSample.AddToGroup(pikeman)
+	groupSample := NewGroup(newOrk())
+	groupSample.AddToGroup(newPikeman())
+	groupSample.AddToGroup(newPeasant())
+	groupSample.AddToGroup(newGoblin())
 
 
 

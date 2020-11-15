@@ -6,19 +6,19 @@ import (
 )
 
 type group struct{
-	cells []*character
+	cells []Character
 	counter int
 	lvl int
 }
 
-func  NewGroup(m *character) *group {
-	Group:=&group{cells: []*character{m}}
+func  NewGroup(m Character) *group {
+	Group:=&group{cells: []Character{m}}
 	Group.counter=1
 	Group.lvl = 1
 	return Group
 }
 
-func (g *group) KickFromGroup(c *character) {
+func (g *group) KickFromGroup(c Character) {
 	for  i :=0; i<len(g.cells); i++ {
 		if g.cells[i]==c {
 			g.cells[i]=nil
@@ -27,8 +27,11 @@ func (g *group) KickFromGroup(c *character) {
 	}
 }
 
-func (g *group) AddToGroup(c *character) {
+func (g *group) AddToGroup(c Character) {
 	if g.counter<4{
+		if g.cells[0].getName()==mainName {
+			c.setFriend(true)
+		}
 		g.counter++
 		g.cells=append(g.cells,c)
 	} else {
@@ -36,15 +39,16 @@ func (g *group) AddToGroup(c *character) {
 	}
 }
 
+
 func (g *group) Count() int {
-	return len(g.cells)
+	return g.counter //len(g.cells)
 }
 
 func (g *group) IsDead() bool {
 	s := g.cells
 	dedmembers:=0
 	for  i :=0; i<len(s); i++ {
-		if g.cells[i].Status==false {
+		if g.cells[i].isStatus()==false {
 			dedmembers++
 		}
 	}
@@ -58,7 +62,7 @@ func (g *group) IsDead() bool {
 func(g *group) readGroup() {
 	s := g.cells
 	for  i :=0; i<len(s); i++ {
-		if g.cells[i]!=nil&&g.cells[i].Status!=false {
+		if g.cells[i]!=nil&&g.cells[i].isStatus()!=false {
 			fmt.Printf("%s[%d] ",s[i].getName(),i+1)
 		}
 	}
@@ -90,18 +94,19 @@ func(g1 *group) BattleStart(g2 *group) bool {
 	n := g1.Count() + g2.Count()
 	fmt.Println(n, " total number of participants from both sides")
 	//var tmp,indox int
-	var fighters []*character
+	var fighters []Character
 	for h := 0; h < g1.Count(); h++ {
 		fighters = append(fighters, g1.cells[h])
 	}
+
 	for h := 0; h < g2.Count(); h++ {
 		fighters = append(fighters, g2.cells[h])
-		fighters[h].Enemy = true
+		fighters[g1.Count()+h].setEnemy(true)
 	}
-	var sorted []*character
+	var sorted []Character
 	sorted = fighters
 	sort.SliceStable(sorted, func(i, j int) bool {
-		return sorted[i].Speed > sorted[j].Speed
+		return sorted[i].getSpeed() > sorted[j].getSpeed()
 	})
 	end := false
 	for end != true {
@@ -118,9 +123,9 @@ func(g1 *group) BattleStart(g2 *group) bool {
 						fmt.Println("You win")
 						return true
 					} else {
-						if sorted[g].Status != false {
+						if sorted[g].isStatus() != false {
 							if sorted[g] == fighters[u] {
-								if fighters[u].Enemy == true {
+								if fighters[u].isEnemy() != true {
 									fighters[u].Attack(g2)
 								} else {
 									fighters[u].Attack(g1)

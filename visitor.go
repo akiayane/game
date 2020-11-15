@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 type visitor interface {
 	visitCastle(*Castle, *group)
@@ -11,15 +14,44 @@ type visitForFight struct {
 	myGroup *group
 	enemyGroup *group
 }
-func (vff *visitForFight) visitCastle(castle *Castle, group *group) {
-	vff.myGroup = group
+func (vff *visitForFight) visitCastle(castle *Castle, gp *group) {
+	var groupHpCopy []int
+
+	vff.myGroup = gp
 	vff.enemyGroup = castle.group
-	vff.myGroup.BattleStart(vff.enemyGroup)
+
+	for _, s := range vff.myGroup.cells {
+		groupHpCopy = append(groupHpCopy, s.getHp())
+	}
+
+	result := vff.myGroup.BattleStart(vff.enemyGroup)
+
+	if result {
+
+		for i, s := range vff.myGroup.cells {
+			s.setHp(groupHpCopy[i])
+		}
+
+		castle.setFriendly()
+
+		for  {
+			fmt.Println("Type exit to leave from castle")
+
+
+			var input string
+			fmt.Scan(&input)
+
+			if input == "exit" {break}
+		}
+	} else {
+		fmt.Println("Game Over")
+		os.Exit(0)
+	}
 }
 
 type visitForTrade struct {
 	myGroup *group
-	mainChar *character
+	mainChar Character
 }
 func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 	vft.myGroup = group
@@ -30,7 +62,8 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 		fmt.Println()
 		fmt.Println("1. Manage Group" +
 			" 2. Buy Items" +
-			" 3. Level Up Group")
+			" 3. Level Up Group" +
+			". Type exit to leave from castle")
 
 		var input string
 		fmt.Scan(&input)
@@ -42,23 +75,24 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 			for {
 				vft.myGroup.readGroup()
 				fmt.Println("1. Remove from group" +
-					" 2. Add to group")
+					" 2. Add to group" +
+					". Type back to return to previous menu")
 
 				var input string
 				fmt.Scan(&input)
 
-				if input == "exit" {break}
+				if input == "back" {break}
 
 				switch input {
 				case "1":
 					for {
-						fmt.Println("Whom you are going to remove?")
+						fmt.Println("Whom you are going to remove? Type back to return to previous menu")
 						vft.myGroup.readGroup()
 
 						var input string
 						fmt.Scan(&input)
 
-						if input == "exit" {break}
+						if input == "back" {break}
 
 						switch input {
 						case "1":
@@ -87,13 +121,13 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 					}
 				case "2":
 					for {
-						fmt.Println("Whom you are going to add?")
+						fmt.Println("Whom you are going to add? Type back to return to previous menu")
 						fmt.Println("1. Peasant 2. Ork 3. Goblin 4. Pikeman")
 
 						var input string
 						fmt.Scan(&input)
 
-						if input == "exit" {break}
+						if input == "back" {break}
 
 						switch input {
 						case "1":
@@ -118,12 +152,13 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 				var input string
 				fmt.Scan(&input)
 
-				if input == "exit" {break}
+				if input == "back" {break}
 			}
 			// bay item
 		case "3":
 			for {
-				fmt.Println("For some amount of money you can upgrade your group")
+				fmt.Println("For some amount of money you can upgrade your group. " +
+					"Type back to return to previous menu")
 				fmt.Println("Gold structure should be fixed")
 
 				fmt.Println("Level of group:", vft.myGroup.lvl)
@@ -133,7 +168,7 @@ func (vft *visitForTrade) visitCastle(castle *Castle, group *group) {
 				var input string
 				fmt.Scan(&input)
 
-				if input == "exit" {break}
+				if input == "back" {break}
 			}
 			//levelup
 		default:

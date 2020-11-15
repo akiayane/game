@@ -1,5 +1,6 @@
 package main
 
+var mainName string
 
 var wbuilder = NewWeaponBuilder()
 var Knife = wbuilder.setName("knife").setDamage(2).Create()

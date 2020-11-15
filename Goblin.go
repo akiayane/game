@@ -1,17 +1,20 @@
 package main
 
 type Goblin struct {
-	Character
+	character
 }
 
-func newGoblin() *character {
-	Char := &character{
+func newGoblin() Character {
+	Char := &Goblin{ character : character{
 		Name: "Goblin",
 		Hp: 10,
 		Damage: 5,
 		Defence: 5,
 		Speed: 6,
 		Status: true,
+		Gold: 50,
+	},
+
 	}
 	return Char
 }
