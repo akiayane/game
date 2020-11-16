@@ -155,7 +155,7 @@ func (m *character)  getStats(){
 	fmt.Println("Hp - ",m.Hp)
 	fmt.Println("Damage - ",m.Damage)
 	fmt.Println("Defence - ",m.Defence)
-	fmt.Println("Crit Chance - ",m.CritChance)
+	//fmt.Println("Crit Chance - ",m.CritChance)
 	fmt.Println("Speed - ",m.Speed)
 	fmt.Println("Price:", m.Gold)
 	fmt.Println()

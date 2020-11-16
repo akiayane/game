@@ -20,10 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="459afb39-b47e-45b0-95e7-b050f0370c44" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/facade.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map.go" beforeDir="false" afterPath="$PROJECT_DIR$/map.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Castle.go" beforeDir="false" afterPath="$PROJECT_DIR$/Castle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Character.go" beforeDir="false" afterPath="$PROJECT_DIR$/Character.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Goblin.go" beforeDir="false" afterPath="$PROJECT_DIR$/Goblin.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group.go" beforeDir="false" afterPath="$PROJECT_DIR$/Group.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ork.go" beforeDir="false" afterPath="$PROJECT_DIR$/Ork.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Peasant.go" beforeDir="false" afterPath="$PROJECT_DIR$/Peasant.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pikeman.go" beforeDir="false" afterPath="$PROJECT_DIR$/Pikeman.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facade.go" beforeDir="false" afterPath="$PROJECT_DIR$/facade.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initialize.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +57,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../questFinal" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
   </component>
   <component name="RecentsManager">
@@ -130,29 +136,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="382" y="176" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605120861235" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1605120945716">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="592" y="218" key="FileChooserDialogImpl" timestamp="1605513571913">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605513571913" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605120945716" />
-    <state width="1493" height="442" key="GridCell.Tab.0.bottom" timestamp="1605482495636">
+    <state width="1493" height="442" key="GridCell.Tab.0.bottom" timestamp="1605483058436">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="442" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605482495636" />
+    <state width="1493" height="442" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605483058436" />
     <state width="1877" height="234" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605389043691" />
-    <state width="1493" height="442" key="GridCell.Tab.0.center" timestamp="1605482495636">
+    <state width="1493" height="442" key="GridCell.Tab.0.center" timestamp="1605483058435">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="442" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605482495636" />
+    <state width="1493" height="442" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605483058435" />
     <state width="1877" height="234" key="GridCell.Tab.0.center/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605389043691" />
-    <state width="1493" height="442" key="GridCell.Tab.0.left" timestamp="1605482495636">
+    <state width="1493" height="442" key="GridCell.Tab.0.left" timestamp="1605483058435">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="442" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605482495636" />
+    <state width="1493" height="442" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605483058435" />
     <state width="1877" height="234" key="GridCell.Tab.0.left/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605389043690" />
-    <state width="1493" height="442" key="GridCell.Tab.0.right" timestamp="1605482495636">
+    <state width="1493" height="442" key="GridCell.Tab.0.right" timestamp="1605483058436">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="442" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605482495636" />
+    <state width="1493" height="442" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605483058436" />
     <state width="1877" height="234" key="GridCell.Tab.0.right/0.0.1920.1040/-1440.0.1440.860@0.0.1920.1040" timestamp="1605389043691" />
     <state width="1877" height="216" key="GridCell.Tab.1.bottom" timestamp="1605320271633">
       <screen x="0" y="0" width="1920" height="1040" />

@@ -11,6 +11,7 @@ func newPeasant() Character {
 		Damage: 4,
 		Defence: 4,
 		Speed: 5,
+		CritChance: 10,
 		Status: true,
 		Gold: 30,
 	},

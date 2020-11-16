@@ -11,6 +11,7 @@ func newPikeman() Character {
 		Damage: 10,
 		Defence: 5,
 		Speed: 5,
+		CritChance: 8,
 		Status: true,
 		Gold: 125,
 	},

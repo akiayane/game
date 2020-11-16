@@ -11,6 +11,7 @@ func newGoblin() Character {
 		Damage: 5,
 		Defence: 5,
 		Speed: 6,
+		CritChance: 10,
 		Status: true,
 		Gold: 50,
 	},

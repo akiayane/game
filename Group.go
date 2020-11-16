@@ -19,12 +19,10 @@ func NewGroup(m Character) *group {
 }
 
 func (g *group) KickFromGroup(c Character) {
-	for  i :=0; i<len(g.cells); i++ {
-		if g.cells[i]==c {
-			g.cells[i]=nil
-			break
-		}
-	}
+
+	g.cells = removeFromGroup(g.cells, c)
+	g.counter--
+
 }
 
 func (g *group) AddToGroup(c Character) {
@@ -94,6 +92,13 @@ func(g *group) enterCastle(c *Castle) {
 
 func(g1 *group) BattleStart(g2 *group) bool {
 	fmt.Println("BATTLE STARTS!")
+	fmt.Println()
+
+	fmt.Println("Enemy group:")
+	for _,s:= range g2.cells {
+		s.getStats()
+	}
+
 	b := newBattle()
 	n := g1.Count() + g2.Count()
 	fmt.Println(n, " total number of participants from both sides")
@@ -145,7 +150,13 @@ func(g1 *group) BattleStart(g2 *group) bool {
 	return false
 }
 
-func (g * group) groupLvlup(){
-
-
+func removeFromGroup(List []Character, char Character) []Character {
+	ListLength := len(List)
+	for i, item := range List {
+		if char.getName() == item.getName() {
+			List[ListLength-1], List[i] = List[i], List[ListLength-1]
+			return List[:ListLength-1]
+		}
+	}
+	return List
 }

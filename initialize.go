@@ -7,7 +7,7 @@ func initialize() []*CastleIcon{
 	myCastleIcon := newCastleIcon(*myCastle, true, 13, 6)
 
 	firstEnemyCastleGroup := NewGroup(newGoblin())
-	firstEnemyCastleGroup.AddToGroup(newGoblin())
+	firstEnemyCastleGroup.AddToGroup(newPeasant())
 	firstEnemyCastleGroup.AddToGroup(newPeasant())
 	firstEnemyCastleGroup.AddToGroup(newPeasant())
 

@@ -65,6 +65,7 @@ func (gf *gameFacade) printCastleCoordinates() {
 }
 
 func (gf *gameFacade) startGame() {
+	clear()
 	fmt.Println("Welcome to the lands of the Northern Daugras!")
 	fmt.Println("First of all give the name to your main character")
 
@@ -72,7 +73,7 @@ func (gf *gameFacade) startGame() {
 	fmt.Scan(&input)
 
 	mainChar := gf.createMainChar(input)
-	mainChar.setGold(200)
+	mainChar.setGold(300)
 	mainName = mainChar.getName()
 	mainGroup := gf.createGroup(mainChar)
 

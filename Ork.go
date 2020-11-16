@@ -11,6 +11,7 @@ func newOrk() Character {
 		Damage: 8,
 		Defence: 6,
 		Speed: 4,
+		CritChance: 8,
 		Status: true,
 		Gold: 100,
 	},
